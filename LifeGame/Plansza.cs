@@ -58,9 +58,14 @@ namespace LifeGame
             return Pobierz(x, y) == ZYWA_KOMORKA;
         }
 
+        private bool czyJestPozaPlansza(int x, int y)
+        {
+            return x < 0 || x >= Szerokosc || y < 0 || y >= Dlugosc;
+        }
+
         public char Pobierz(int x, int y)
         {
-            if (x < 0 || x >= Szerokosc || y < 0 || y >= Dlugosc)
+            if (czyJestPozaPlansza(x, y))
             {
                 return MARTWA_KOMORKA;
             }
@@ -69,7 +74,7 @@ namespace LifeGame
 
         public void Ozyj(int x, int y)
         {
-            if (x < 0 || x >= Szerokosc || y < 0 || y >= Dlugosc)
+            if (czyJestPozaPlansza(x, y))
             {
                 return;
             }
@@ -78,7 +83,7 @@ namespace LifeGame
 
         public void Usmierc(int x, int y)
         {
-            if (x < 0 || x >= Szerokosc || y < 0 || y >= Dlugosc)
+            if (czyJestPozaPlansza(x, y))
             {
                 return;
             }
