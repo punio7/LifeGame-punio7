@@ -11,47 +11,47 @@ namespace LifeGame
         static void Main(string[] args)
         {
             Plansza plansza = new Plansza(80, 24);
+            Sasiedzi sasiedzi = new Sasiedzi(plansza);
             plansza.Zaludnij(500);
 
             while (true)
             {
                 Rysuj(plansza);
                 System.Threading.Thread.Sleep(100);
-                Plansza nowaPlansza = Aktualizuj(plansza);
-                plansza = nowaPlansza;
+                Aktualizuj(plansza, sasiedzi);
             }
         }
-        private static Plansza Aktualizuj(Plansza staraPlansza)
+        private static Plansza Aktualizuj(Plansza plansza, Sasiedzi sasiedzi)
         {
-            Plansza nowaPlansza = new Plansza(staraPlansza.Szerokosc, staraPlansza.Dlugosc);
+            sasiedzi.Aktualizuj();
 
-            for (int x = 0; x < staraPlansza.Szerokosc; x++)
+            for (int x = 0; x < plansza.Szerokosc; x++)
             {
-                for (int y = 0; y < staraPlansza.Dlugosc; y++)
+                for (int y = 0; y < plansza.Dlugosc; y++)
                 {
-                    int liczbaSasiadow = staraPlansza.ZywiSasiedzi(x, y);
-                    if (!staraPlansza.CzyZyje(x, y))
+                    int liczbaSasiadow = sasiedzi.ZywiSasiedzi(x, y);
+                    if (!plansza.CzyZyje(x, y))
                     {
                         if (liczbaSasiadow == 3)
                         {
-                            nowaPlansza.Ozyj(x, y);
+                            plansza.Ozyj(x, y);
                         }
                     }
                     else
                     {
                         if (liczbaSasiadow == 2 || liczbaSasiadow == 3)
                         {
-                            nowaPlansza.Ozyj(x, y);
+                            plansza.Ozyj(x, y);
                         }
                         else
                         {
-                            nowaPlansza.Usmierc(x, y);
+                            plansza.Usmierc(x, y);
                         }
                     }
                 }
             }
 
-            return nowaPlansza;
+            return plansza;
         }
 
         private static void Rysuj(Plansza plansza)

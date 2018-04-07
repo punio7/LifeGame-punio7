@@ -4,8 +4,8 @@ namespace LifeGame
 {
     internal class Plansza
     {
-        public int Szerokosc { get; private set; }
-        public int Dlugosc { get; private set; }
+        public readonly int Szerokosc;
+        public readonly int Dlugosc;
 
         private char[][] komorki;
         private const char MARTWA_KOMORKA = ' ';
@@ -88,22 +88,6 @@ namespace LifeGame
                 return;
             }
             komorki[y][x] = MARTWA_KOMORKA;
-        }
-
-        public int ZywiSasiedzi(int x, int y)
-        {
-            int liczba = 0;
-
-            liczba = Pobierz(x + 1, y - 1) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-            liczba = Pobierz(x + 1, y) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-            liczba = Pobierz(x + 1, y + 1) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-            liczba = Pobierz(x, y + 1) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-            liczba = Pobierz(x - 1, y + 1) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-            liczba = Pobierz(x - 1, y) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-            liczba = Pobierz(x - 1, y - 1) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-            liczba = Pobierz(x, y - 1) == ZYWA_KOMORKA ? liczba + 1 : liczba;
-
-            return liczba;
         }
     }
 }
